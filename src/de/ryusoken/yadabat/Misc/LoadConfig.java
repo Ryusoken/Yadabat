@@ -41,16 +41,12 @@ public class LoadConfig {
 
             String Json = "{" + sb.toString();
 
-            System.out.println(Json);
-
             JsonParser parser = new JsonParser();
             JsonElement root = parser.parse(Json);
             JsonObject cfg = root.getAsJsonObject();
 
             Config.API_Key = cfg.get("API_Key").toString();
-
             System.out.println("Die Konfigurationsdatei konnte erfolgreich eingelesen werden.");
-
 
         } catch (FileNotFoundException ex) {
             System.out.println(ex.getMessage());
