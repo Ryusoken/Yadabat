@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class Utils {
 
@@ -33,7 +35,6 @@ public class Utils {
         return null;
     }
 
-
     public static String RemoveQuotes(String ISBN) {
 
         String ISBNNew = "";
@@ -47,5 +48,9 @@ public class Utils {
 
         }
         return ISBNNew;
+    }
+
+    public static String getCurrentDate() {
+        return new SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().getTime());
     }
 }

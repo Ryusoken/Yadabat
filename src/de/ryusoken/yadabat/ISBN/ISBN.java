@@ -26,10 +26,7 @@ public class ISBN {
         return ISBNNew;
     }
 
-
     public static String getVolumeInformation(String ISBN, String info) {
-
-        String ErrorMsg = "";
 
         String s = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + ISBN + "&key=" + Utils.RemoveQuotes(Config.API_Key);
         URL url;
@@ -42,19 +39,11 @@ public class ISBN {
             JsonObject volumeInfo = items.getAsJsonObject("volumeInfo");
             return volumeInfo.get(info).toString();
 
-        } catch (MalformedURLException ex) {
-            ex.printStackTrace();
-            ErrorMsg = ex.getMessage();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            ErrorMsg = ex.getMessage();
         } catch (Exception ex) {
             ex.printStackTrace();
-            ErrorMsg = ex.getMessage();
         }
 
-        return ErrorMsg;
+        return "Error";
 
     }
-
 }

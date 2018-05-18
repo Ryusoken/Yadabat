@@ -3,8 +3,8 @@ package de.ryusoken.yadabat.Misc;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
 import java.io.*;
+
 
 public class LoadConfig {
 
@@ -44,8 +44,14 @@ public class LoadConfig {
             JsonParser parser = new JsonParser();
             JsonElement root = parser.parse(Json);
             JsonObject cfg = root.getAsJsonObject();
+            JsonObject mysql = cfg.getAsJsonObject("MySQL");
 
-            Config.API_Key = cfg.get("API_Key").toString();
+            Config.API_Key = Utils.RemoveQuotes(cfg.get("API_Key").toString());
+            Config.Host = Utils.RemoveQuotes(mysql.get("Host").toString());
+            Config.Database = Utils.RemoveQuotes(mysql.get("Database").toString());
+            Config.User = Utils.RemoveQuotes(mysql.get("User").toString());
+            Config.Password = Utils.RemoveQuotes(mysql.get("Password").toString());
+
             System.out.println("Die Konfigurationsdatei konnte erfolgreich eingelesen werden.");
 
         } catch (FileNotFoundException ex) {

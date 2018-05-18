@@ -38,7 +38,6 @@ public class EAN {
         String s = "http://ofdbgw.metawave.ch/fassung_json/" + Utils.RemoveQuotes(getInformationByName(EAN13, "fassungid"));
 
         try {
-
             JsonElement root = Utils.readUrl(s);
             JsonObject rootobj = root.getAsJsonObject();
             JsonObject ofdbgw = rootobj.getAsJsonObject("ofdbgw");
@@ -50,17 +49,13 @@ public class EAN {
 
             return resultat.get(info).toString();
 
-        } catch (MalformedURLException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         return "Error";
     }
 
-    public static int getErrorMessage(JsonObject status) {
+    private static int getErrorMessage(JsonObject status) {
 
         if(Integer.parseInt(status.get("rcode").toString()) == 4) {
             System.err.println("Es wurde kein Produkt zu ihrer Anfrage gefunden.");
